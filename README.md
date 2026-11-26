@@ -37,11 +37,34 @@ Built by [AWD Digital](https://awddigital.ca/). Free version.
 6. Check DNS: one SPF record covering all senders, DMARC (start with `p=none`), and DKIM in Microsoft 365 if the client uses Outlook.
 7. Import contacts (Client Mailer > Contacts > Import), send a test to [mail-tester.com](https://www.mail-tester.com/), then send.
 
+## Updates
+
+Sites check this GitHub repository for new versions, which then show up in **Plugins** like any other update. Each plugin row also gets a "Check for updates" link.
+
+**Releasing a new version**
+
+1. Bump the version in `awd-client-mailer.php` (header and `AWDCM_VERSION`) and the `Stable tag` in `readme.txt`. Add a changelog entry.
+2. Commit and push to `main`.
+3. On GitHub, go to **Releases > Draft a new release**, create the tag `vX.Y.Z` (matching the version) on `main`, and publish.
+4. The **Build release zip** workflow checks that the tag matches the version, builds `awd-client-mailer.zip` and attaches it to the release. Sites see the update within about 12 hours, or right away with "Check for updates".
+
+Do not mark the release as a pre-release unless you want sites to ignore it.
+
+**Private repository:** while this repository is private, each site needs a read-only token. Create a fine-grained personal access token limited to this repository with **Contents: Read-only**, then add it to the site's `wp-config.php`:
+
+```php
+define( 'AWDCM_GITHUB_TOKEN', 'github_pat_...' );
+```
+
+If the repository is made public, no token is needed.
+
 ## Configuration constants (wp-config.php)
 
 ```php
 define( 'AWDCM_SMTP2GO_API_KEY', 'api-XXXXXXXX' ); // Keeps the key out of the database.
 define( 'AWDCM_CAP', 'manage_options' );           // Capability required to use the plugin.
+define( 'AWDCM_GITHUB_TOKEN', 'github_pat_...' );  // Only while the GitHub repository is private.
+define( 'AWDCM_DISABLE_UPDATES', true );           // Turn off update checks on this site.
 ```
 
 ## Filters
@@ -85,6 +108,10 @@ Each recipient is checked again just before sending, so anyone who unsubscribes 
 
 ### 1.0.0
 - First release.
+
+## Credits
+
+Updates use [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker) by Janis Elsts (MIT licence), bundled in `lib/`.
 
 ## Licence
 

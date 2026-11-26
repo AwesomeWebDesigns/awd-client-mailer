@@ -2,6 +2,7 @@
 /**
  * Plugin Name:       AWD Client Mailer
  * Plugin URI:        https://awddigital.ca/
+ * Update URI:        https://github.com/AwesomeWebDesigns/awd-client-mailer
  * Description:       Send simple, CASL-friendly emails to your clients from WordPress, delivered one by one through SMTP2GO.
  * Version:           1.0.0
  * Requires at least: 6.0
@@ -37,6 +38,9 @@ require_once AWDCM_DIR . 'includes/class-awdcm-smtp2go.php';
 require_once AWDCM_DIR . 'includes/class-awdcm-queue.php';
 require_once AWDCM_DIR . 'includes/class-awdcm-unsubscribe.php';
 require_once AWDCM_DIR . 'includes/class-awdcm-webhook.php';
+require_once AWDCM_DIR . 'includes/class-awdcm-updater.php';
+
+AWDCM_Updater::init();
 
 register_activation_hook( __FILE__, array( 'AWDCM_Install', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'AWDCM_Queue', 'unschedule' ) );

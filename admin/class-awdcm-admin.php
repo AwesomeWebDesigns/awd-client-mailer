@@ -140,7 +140,7 @@ class AWDCM_Admin {
 				<strong>Looking to add more features?</strong>
 				<span>Scheduled sends, automations, reports, CRM and booking integrations: we can build what your business needs.</span>
 			</div>
-			<a class="awdcm-pill" href="<?php echo esc_url( apply_filters( 'awdcm_contact_url', self::CONTACT_URL ) ); ?>" target="_blank" rel="noopener">contact us</a>
+			<a class="awdcm-pill" href="<?php echo esc_url( apply_filters( 'awdcm_contact_url', self::CONTACT_URL ) ); ?>" target="_blank" rel="noopener">Contact Us</a>
 		</div>
 		<?php
 	}

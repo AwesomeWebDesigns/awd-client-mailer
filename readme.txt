@@ -4,7 +4,7 @@ Tags: email, smtp2go, casl, clients, newsletter
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ Looking to add more features? Contact AWD Digital at https://awddigital.ca/
 3. Follow the deliverability checklist at the bottom of the Settings page.
 
 == Changelog ==
+
+= 1.0.3 =
+* The banner button now reads "Contact Us".
 
 = 1.0.2 =
 * Full step-by-step SMTP2GO webhook setup guide on the Settings page, with a copy button for the webhook address.

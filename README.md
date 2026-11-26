@@ -81,7 +81,7 @@ define( 'AWDCM_DISABLE_UPDATES', true );           // Turn off update checks on 
 // Hide the AWD Digital "Looking to add more features?" banner.
 add_filter( 'awdcm_show_upgrade_banner', '__return_false' );
 
-// Change where the banner's "contact us" button points.
+// Change where the banner's "Contact Us" button points.
 add_filter( 'awdcm_contact_url', fn() => 'https://awddigital.ca/contact/' );
 
 // Adjust the SMTP2GO request payload before sending.
@@ -113,6 +113,9 @@ Each recipient is checked again just before sending, so anyone who unsubscribes 
 - CSV exports guard against spreadsheet formula injection.
 
 ## Changelog
+
+### 1.0.3
+- The banner button now reads "Contact Us".
 
 ### 1.0.2
 - Full step-by-step SMTP2GO webhook setup guide on the Settings page, with a copy button for the webhook address.

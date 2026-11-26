@@ -115,6 +115,7 @@ class AWDCM_Admin {
 			echo ' <a href="' . esc_url( $href ) . '" class="page-title-action">' . esc_html( $label ) . '</a>';
 		}
 		echo '<hr class="wp-header-end">';
+		self::upgrade_banner();
 		self::render_notices();
 
 		$issues = AWDCM_Settings::setup_issues();
@@ -124,7 +125,6 @@ class AWDCM_Admin {
 	}
 
 	public static function footer() {
-		self::upgrade_banner();
 		echo '</div>';
 	}
 
@@ -137,7 +137,7 @@ class AWDCM_Admin {
 		<div class="awdcm-upgrade">
 			<div class="awdcm-upgrade-text">
 				<span class="awdcm-upgrade-label">AWD Digital</span>
-				<strong>looking to add more features?</strong>
+				<strong>Looking to add more features?</strong>
 				<span>Scheduled sends, automations, reports, CRM and booking integrations: we can build what your business needs.</span>
 			</div>
 			<a class="awdcm-pill" href="<?php echo esc_url( apply_filters( 'awdcm_contact_url', self::CONTACT_URL ) ); ?>" target="_blank" rel="noopener">contact us</a>

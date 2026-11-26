@@ -70,7 +70,7 @@ define( 'AWDCM_DISABLE_UPDATES', true );           // Turn off update checks on 
 ## Filters
 
 ```php
-// Hide the AWD Digital "looking to add more features?" banner.
+// Hide the AWD Digital "Looking to add more features?" banner.
 add_filter( 'awdcm_show_upgrade_banner', '__return_false' );
 
 // Change where the banner's "contact us" button points.
@@ -105,6 +105,10 @@ Each recipient is checked again just before sending, so anyone who unsubscribes 
 - CSV exports guard against spreadsheet formula injection.
 
 ## Changelog
+
+### 1.0.1
+- Automatic updates from the AWD Digital GitHub repository.
+- The AWD Digital banner now sits at the top of each Client Mailer screen.
 
 ### 1.0.0
 - First release.

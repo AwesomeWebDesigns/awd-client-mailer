@@ -4,7 +4,7 @@ Tags: email, smtp2go, casl, clients, newsletter
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,10 @@ Looking to add more features? Contact AWD Digital at https://awddigital.ca/
 3. Follow the deliverability checklist at the bottom of the Settings page.
 
 == Changelog ==
+
+= 1.0.1 =
+* Automatic updates from the AWD Digital GitHub repository.
+* The AWD Digital banner now sits at the top of each Client Mailer screen.
 
 = 1.0.0 =
 * First release.

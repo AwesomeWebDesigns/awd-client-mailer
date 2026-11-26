@@ -56,7 +56,7 @@
 .awdcm .awdcm-cons li::before { content: "\2212  "; color: #b32d2e; font-weight: 700; }
 
 /* AWD Digital upgrade banner. */
-.awdcm .awdcm-upgrade { display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #031b4e; color: #dce5ff; border-radius: 20px; padding: 18px 24px; margin: 28px 0 8px; }
+.awdcm .awdcm-upgrade { display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #031b4e; color: #dce5ff; border-radius: 20px; padding: 14px 24px; margin: 12px 0 16px; }
 .awdcm .awdcm-upgrade-text { display: flex; flex-direction: column; gap: 2px; }
 .awdcm .awdcm-upgrade-label { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; font-weight: 600; color: #8fb3ff; }
 .awdcm .awdcm-upgrade strong { color: #fff; font-size: 16px; }

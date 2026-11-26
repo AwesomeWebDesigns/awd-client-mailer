@@ -4,7 +4,7 @@
  * Plugin URI:        https://awddigital.ca/
  * Update URI:        https://github.com/AwesomeWebDesigns/awd-client-mailer
  * Description:       Send simple, CASL-friendly emails to your clients from WordPress, delivered one by one through SMTP2GO.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            AWD Digital
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AWDCM_VERSION', '1.0.1' );
+define( 'AWDCM_VERSION', '1.0.2' );
 define( 'AWDCM_FILE', __FILE__ );
 define( 'AWDCM_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AWDCM_URL', plugin_dir_url( __FILE__ ) );

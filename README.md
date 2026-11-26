@@ -33,7 +33,15 @@ Built by [AWD Digital](https://awddigital.ca/). Free version.
    - From name, from email (on the verified domain) and reply-to (the client's normal inbox)
    - Business name and mailing address (required by CASL)
    - Logo and brand colour for branded emails
-5. In SMTP2GO, add the webhook address shown on the Settings page (Settings > Webhooks) and select the **bounce**, **spam** and **unsubscribe** events.
+5. Set up the SMTP2GO webhook (the Settings page has the same steps, with a copy button for the address):
+   - In SMTP2GO, go to **Settings > Webhooks > Add Webhook**.
+   - **URL:** the webhook address from Client Mailer > Settings.
+   - **Authorization header:** None. **Custom headers:** empty. **Output type:** JSON. **Custom rate limit:** off.
+   - **Users:** all users if the account only sends for this site; otherwise only this site's API key (or use a subaccount per site).
+   - **Events:** Bounce, Spam, Unsubscribe and optionally Reject. Leave processed, delivered, open and click unticked.
+   - **Testing tab:** every event should return HTTP 200 with `{"ok":true}`. A 401 means the address or key is wrong; other errors usually mean a security plugin or firewall is blocking `/wp-json/`.
+   - **Save changes**, then check Contacts to confirm no real client was changed by the test events.
+   - In **Settings > Sending Options**, turn **off** SMTP2GO's unsubscribe footer (the plugin adds its own) and, ideally, open and click tracking.
 6. Check DNS: one SPF record covering all senders, DMARC (start with `p=none`), and DKIM in Microsoft 365 if the client uses Outlook.
 7. Import contacts (Client Mailer > Contacts > Import), send a test to [mail-tester.com](https://www.mail-tester.com/), then send.
 
@@ -105,6 +113,9 @@ Each recipient is checked again just before sending, so anyone who unsubscribes 
 - CSV exports guard against spreadsheet formula injection.
 
 ## Changelog
+
+### 1.0.2
+- Full step-by-step SMTP2GO webhook setup guide on the Settings page, with a copy button for the webhook address.
 
 ### 1.0.1
 - Automatic updates from the AWD Digital GitHub repository.

@@ -66,3 +66,7 @@
 	.awdcm .awdcm-upgrade { flex-direction: column; align-items: flex-start; }
 	.awdcm .awdcm-cols { grid-template-columns: 1fr; }
 }
+.awdcm .awdcm-copy-row { display: flex; gap: 8px; align-items: center; }
+.awdcm .awdcm-copy-row input { flex: 1; }
+.awdcm .awdcm-card h3 { margin: 20px 0 6px; }
+.awdcm .awdcm-steps li { margin-bottom: 8px; }

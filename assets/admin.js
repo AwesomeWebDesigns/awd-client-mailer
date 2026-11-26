@@ -9,6 +9,23 @@ jQuery( function ( $ ) {
 		}
 	} );
 
+	// Copy buttons.
+	$( document ).on( 'click', '[data-awdcm-copy]', function () {
+		var $btn = $( this );
+		var $input = $( $btn.data( 'awdcm-copy' ) );
+		$input.trigger( 'select' );
+		var done = function () {
+			$btn.text( 'Copied' );
+			setTimeout( function () { $btn.text( 'Copy' ); }, 2000 );
+		};
+		if ( navigator.clipboard && window.isSecureContext ) {
+			navigator.clipboard.writeText( $input.val() ).then( done );
+		} else {
+			document.execCommand( 'copy' );
+			done();
+		}
+	} );
+
 	// Colour picker.
 	if ( $.fn.wpColorPicker ) {
 		$( '.awdcm-color' ).wpColorPicker();

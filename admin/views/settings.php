@@ -140,8 +140,52 @@ AWDCM_Admin::header( 'Client Mailer Settings' );
 
 	<div class="awdcm-card">
 		<h2>Bounces and spam complaints (SMTP2GO webhook)</h2>
-		<p>In SMTP2GO, go to <strong>Settings &gt; Webhooks</strong>, add this address, and select the <strong>bounce</strong>, <strong>spam</strong> and <strong>unsubscribe</strong> events. Contacts are then updated automatically.</p>
-		<p><input type="text" class="large-text code" readonly value="<?php echo esc_attr( AWDCM_Webhook::url() ); ?>" onclick="this.select();"></p>
+		<p class="awdcm-muted">The webhook lets SMTP2GO tell this website when an email bounces, is marked as spam, or someone unsubscribes, so those contacts stop receiving emails automatically. Set it up once per website.</p>
+
+		<p><label for="awdcm-webhook-url"><strong>Your webhook address</strong></label></p>
+		<p class="awdcm-copy-row">
+			<input type="text" id="awdcm-webhook-url" class="large-text code" readonly value="<?php echo esc_attr( AWDCM_Webhook::url() ); ?>" onclick="this.select();">
+			<button type="button" class="button" data-awdcm-copy="#awdcm-webhook-url">Copy</button>
+		</p>
+		<p class="description">Keep this address private: it contains a secret key. If it is ever shared by mistake, create a new one with the link at the bottom of this box and update it in SMTP2GO.</p>
+
+		<h3>Step 1: Add the webhook in SMTP2GO</h3>
+		<ol class="awdcm-list awdcm-steps">
+			<li>Log in to SMTP2GO and go to <strong>Settings &gt; Webhooks</strong>, then click <strong>Add Webhook</strong>.</li>
+			<li><strong>URL:</strong> paste the webhook address above.</li>
+			<li><strong>Authorization header:</strong> leave it as <strong>None</strong>. The secret key in the address is what this website checks.</li>
+			<li><strong>Custom headers:</strong> leave empty.</li>
+			<li><strong>Users:</strong> if this SMTP2GO account only sends for this website, keep <strong>All users selected</strong>. If the account also sends for other websites, select only the API key used by this website, so their bounces and unsubscribes are not recorded here. (Tip: a separate SMTP2GO subaccount per website keeps everything apart.)</li>
+			<li><strong>Output type:</strong> <strong>JSON</strong> (form data also works).</li>
+			<li><strong>Custom rate limit:</strong> leave it off.</li>
+			<li><strong>Events:</strong> tick only <strong>Bounce</strong>, <strong>Spam</strong>, <strong>Unsubscribe</strong> and, optionally, <strong>Reject</strong>. Leave <em>processed</em>, <em>delivered</em>, <em>open</em> and <em>click</em> unticked: this website does not use them.</li>
+		</ol>
+
+		<h3>Step 2: Test it</h3>
+		<ol class="awdcm-list awdcm-steps">
+			<li>Open the <strong>Testing</strong> tab and click <strong>Test this webhook</strong>.</li>
+			<li>Every event should show <strong>HTTP Code (200)</strong> with the response <code>{"ok":true}</code>.</li>
+			<li>If you see <strong>401</strong>, the address does not match this website: copy it again from this page. Any other error usually means a security plugin or firewall is blocking <code>/wp-json/</code> requests; allow this address there.</li>
+			<li>Click <strong>Save changes</strong>.</li>
+			<li>Test events use sample email addresses, which are simply logged. Have a quick look at <a href="<?php echo esc_url( AWDCM_Admin::url( 'awdcm-contacts' ) ); ?>">Contacts</a> to confirm no real client was marked as unsubscribed or bounced.</li>
+		</ol>
+
+		<h3>Step 3: Check SMTP2GO's sending options</h3>
+		<p>In SMTP2GO, go to <strong>Settings &gt; Sending Options</strong>:</p>
+		<ul class="awdcm-list">
+			<li><strong>Unsubscribe footer: turn it off.</strong> This plugin already adds a CASL footer and unsubscribe link to every email; SMTP2GO's footer would add a second one.</li>
+			<li><strong>Open and click tracking: we recommend turning them off.</strong> Click tracking rewrites every link through a tracking domain, which can slightly hurt inbox placement, and this plugin does not use that data.</li>
+		</ul>
+
+		<h3>What happens next</h3>
+		<ul class="awdcm-list">
+			<li><strong>Hard bounce</strong> (the address does not exist): the contact is marked <em>Bounced</em>.</li>
+			<li><strong>Spam complaint</strong>: the contact is marked <em>Unsubscribed</em>.</li>
+			<li><strong>Unsubscribe</strong>: the contact is marked <em>Unsubscribed</em>.</li>
+			<li><strong>Soft bounce and reject</strong>: recorded on the contact's activity log only.</li>
+		</ul>
+		<p class="awdcm-muted">Every change appears in the contact's activity and consent log.</p>
+
 		<p><button type="submit" name="regenerate_secret" value="1" class="button-link" data-awdcm-confirm="Create a new webhook address? The old one stops working.">Create a new webhook address</button></p>
 	</div>
 
@@ -162,7 +206,7 @@ AWDCM_Admin::header( 'Client Mailer Settings' );
 		<li><strong>SPF:</strong> if you send other email from this domain (for example Microsoft 365), keep a single SPF record that includes all your senders.</li>
 		<li><strong>DMARC:</strong> add a TXT record at <code>_dmarc.<?php echo esc_html( $domain ); ?></code>, starting with <code>v=DMARC1; p=none; rua=mailto:you@<?php echo esc_html( $domain ); ?></code>.</li>
 		<li><strong>Microsoft 365 users:</strong> also turn on DKIM for your domain in the Microsoft Defender portal, so your everyday Outlook emails are protected too.</li>
-		<li><strong>Webhook:</strong> add the webhook address above so bounces and complaints update your contacts.</li>
+		<li><strong>Webhook and sending options:</strong> follow the three steps in the webhook box above.</li>
 		<li><strong>Test:</strong> send a test email to the address from <a href="https://www.mail-tester.com/" target="_blank" rel="noopener">mail-tester.com</a> and aim for 9/10 or higher.</li>
 	</ol>
 </div>
